@@ -192,106 +192,61 @@
             </ul>
           </div>
 
+          <div class="resume-card mt-4">
+            <div class="resume-card-icon">
+              <i class="far fa-file-pdf"></i>
+            </div>
+            <div class="resume-card-content">
+              <h6 class="resume-card-title">Resume</h6>
+              <p class="resume-card-copy">A concise snapshot of my recent work, responsibilities, and impact.</p>
+              <div class="resume-card-actions">
+                <a href="#" class="btn btn-sm btn-primary resume-preview-btn">Preview</a>
+                <a href="/files/resume.pdf" class="btn btn-sm btn-outline-primary" target="_blank" rel="noopener">Download</a>
+              </div>
+            </div>
+          </div>
+
         </div>
 
         <div class="col-sm-6 pt-5 pl-md-4 pl-sm-3 pt-sm-0">
-          <div class="row">
-
-            <div class="col-6 col-lg-4 p-2">
-
-
-              <div class="circular-progress blue">
-                <span class="circular-progress-left">
-                  <span class="circular-progress-bar circular-progress-percentage-90"></span>
-                </span>
-                <span class="circular-progress-right">
-                  <span class="circular-progress-bar"></span>
-                </span>
-                <div class="circular-progress-value">Leadership</div>
-              </div>
+          <div class="focus-area-grid">
+            <div class="focus-area-card">
+              <div class="focus-area-icon"><i class="fas fa-project-diagram"></i></div>
+              <h6>Backend Architecture</h6>
+              <p>Designing APIs, event-driven flows, and services that scale with new product demands.</p>
             </div>
-
-
-            <div class="col-6 col-lg-4 p-2">
-
-
-              <div class="circular-progress yellow">
-                <span class="circular-progress-left">
-                  <span class="circular-progress-bar circular-progress-percentage-90"></span>
-                </span>
-                <span class="circular-progress-right">
-                  <span class="circular-progress-bar"></span>
-                </span>
-                <div class="circular-progress-value">Team Work</div>
-              </div>
+            <div class="focus-area-card">
+              <div class="focus-area-icon"><i class="fas fa-network-wired"></i></div>
+              <h6>Distributed Systems</h6>
+              <p>Exploring messaging, rate limiting, and resilience patterns for data-heavy products.</p>
             </div>
-
-
-            <div class="col-6 col-lg-4 p-2">
-
-
-              <div class="circular-progress pink">
-                <span class="circular-progress-left">
-                  <span class="circular-progress-bar circular-progress-percentage-90"></span>
-                </span>
-                <span class="circular-progress-right">
-                  <span class="circular-progress-bar"></span>
-                </span>
-                <div class="circular-progress-value">Communication</div>
-              </div>
+            <div class="focus-area-card">
+              <div class="focus-area-icon"><i class="fas fa-database"></i></div>
+              <h6>Data &amp; Storage</h6>
+              <p>Working with ClickHouse, Redis, PostgreSQL, and streaming pipelines to keep insights fresh.</p>
             </div>
-
-
-            <div class="col-6 col-lg-4 p-2">
-
-
-              <div class="circular-progress green">
-                <span class="circular-progress-left">
-                  <span class="circular-progress-bar circular-progress-percentage-95"></span>
-                </span>
-                <span class="circular-progress-right">
-                  <span class="circular-progress-bar"></span>
-                </span>
-                <div class="circular-progress-value">Problem Solving</div>
-              </div>
+            <div class="focus-area-card">
+              <div class="focus-area-icon"><i class="fas fa-tools"></i></div>
+              <h6>DevOps Reliability</h6>
+              <p>Shipping with Docker, AWS, CI/CD, and observability practices that keep systems healthy.</p>
             </div>
-
-
-            <div class="col-6 col-lg-4 p-2">
-
-
-              <div class="circular-progress sky">
-                <span class="circular-progress-left">
-                  <span class="circular-progress-bar circular-progress-percentage-95"></span>
-                </span>
-                <span class="circular-progress-right">
-                  <span class="circular-progress-bar"></span>
-                </span>
-                <div class="circular-progress-value">Fast Learner</div>
-              </div>
-            </div>
-
-
-            <div class="col-6 col-lg-4 p-2">
-
-
-              <div class="circular-progress orange">
-                <span class="circular-progress-left">
-                  <span class="circular-progress-bar circular-progress-percentage-100"></span>
-                </span>
-                <span class="circular-progress-right">
-                  <span class="circular-progress-bar"></span>
-                </span>
-                <div class="circular-progress-value">Hard Working</div>
-              </div>
-            </div>
-
-
           </div>
         </div>
       </div>
     </div>
 
+  </div>
+
+  <div id="resumeModal" class="resume-modal" aria-hidden="true">
+    <div class="resume-modal-backdrop"></div>
+    <div class="resume-modal-dialog" role="dialog" aria-modal="true" aria-label="Resume preview">
+      <button type="button" class="resume-modal-close" aria-label="Close resume preview">&times;</button>
+      <iframe title="Resume preview" data-src="/files/resume.pdf#view=FitH"></iframe>
+      <div class="resume-modal-footer">
+        <a href="/files/resume.pdf" class="btn btn-sm btn-light" target="_blank" rel="noopener">Open in new tab</a>
+        <a href="/files/resume.pdf" class="btn btn-sm btn-primary" download>Download PDF</a>
+      </div>
+    </div>
   </div>
 
 
@@ -1288,6 +1243,55 @@ unresponsive nodes, promoting robust system reliability and data consistency.</p
   <script src="/assets/js/github-button.js"></script>
   <script src="/assets/js/home.js"></script>
   <script src="/assets/js/jquery.filterizr.min.js"></script>
+  <script>
+    (function () {
+      var modal = document.getElementById('resumeModal');
+      if (!modal) {
+        return;
+      }
+
+      var openButtons = document.querySelectorAll('.resume-preview-btn');
+      var closeButton = modal.querySelector('.resume-modal-close');
+      var backdrop = modal.querySelector('.resume-modal-backdrop');
+      var iframe = modal.querySelector('iframe');
+
+      function ensureIframeLoaded() {
+        if (iframe && !iframe.src && iframe.dataset.src) {
+          iframe.src = iframe.dataset.src;
+        }
+      }
+
+      function openModal(event) {
+        if (event) {
+          event.preventDefault();
+        }
+        ensureIframeLoaded();
+        modal.classList.add('is-visible');
+        document.body.classList.add('resume-modal-open');
+      }
+
+      function closeModal() {
+        modal.classList.remove('is-visible');
+        document.body.classList.remove('resume-modal-open');
+      }
+
+      openButtons.forEach(function (button) {
+        button.addEventListener('click', openModal);
+      });
+
+      [closeButton, backdrop].forEach(function (element) {
+        if (element) {
+          element.addEventListener('click', closeModal);
+        }
+      });
+
+      document.addEventListener('keydown', function (event) {
+        if (event.key === 'Escape' && modal.classList.contains('is-visible')) {
+          closeModal();
+        }
+      });
+    })();
+  </script>
 </body>
 
 </html>
