@@ -94,6 +94,8 @@ var projectCards;
 
       for (let i = 0; i < btns.length; i++) {
         btns[i].onclick = function () {
+          $("#project-filter-buttons .btn").removeClass('active');
+          btns[i].classList.add('active');
           showGithubStars(btns[i].id);
         }
       }
@@ -102,6 +104,9 @@ var projectCards;
     var projectCardHolder = document.getElementById("project-card-holder");
     if (projectCardHolder != null && projectCardHolder.children.length != 0) {
       projectCards = $(".filtr-projects").filterizr({ layout: 'sameWidth' });
+      projectCards.filterizr('filter', 'Latest');
+      $("#project-filter-buttons .btn").removeClass('active');
+      $("#project-filter-buttons [data-filter='Latest']").addClass('active');
     }
 
     function showGithubStars() {
