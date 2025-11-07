@@ -77,7 +77,7 @@
   border-left: 3px solid #248aaa;
   z-index: 1;
   height: 100%;
-  left: 50%;
+  left: calc(50% - 1.5px);
 }
 
 .vertical-line-left-adjustment::after {
@@ -119,13 +119,13 @@
 }
 
 .bottom-left {
-  left: -50%;
-  top: calc(50% - 3px);
+  left: calc(-50% - 2px);
+  top: calc(50% - 1.5px);
 }
 
 .bottom-right {
-  left: 50%;
-  top: calc(50% - 3px);
+  left: calc(50% + 2px);
+  top: calc(50% - 4px);
 }
 
 /* ============= Device specific fixes ======= */
